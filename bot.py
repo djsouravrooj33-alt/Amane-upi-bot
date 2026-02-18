@@ -250,9 +250,14 @@ def initialize_on_first_request():
     logger.info("🚀 Initializing bot on first request (gunicorn mode)")
     run_startup()
 
-# ========= লোকাল টেস্টিং-এর জন্য =========
+# ========= MAIN =========
 if __name__ == "__main__":
-    logger.info("🚀 Running in local development mode")
+    logger.info("🚀 Running locally")
     run_startup()
     port = int(os.environ.get("PORT", 10000))
-    app.run(host="0.0.0.0", port=port, debug=False)
+    app.run(host="0.0.0.0", port=port)
+
+# 🔥 Render / gunicorn entrypoint
+else:
+    logger.info("🚀 Running on Render (gunicorn)")
+    run_startup()
